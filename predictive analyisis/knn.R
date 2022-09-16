@@ -23,7 +23,7 @@ View(train_scale)
 
 #Fitting the model
 
-classfy_knn <- knn(train=train_scale,test = test_scale,cl=train$carb,k=1)
+classfy_knn <- knn(train=train_scale,test = test_scale,cl=train$carb,k=)
 
 View(classfy_knn)
 

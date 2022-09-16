@@ -1,5 +1,8 @@
+library(caTools)
+library(e1071)
+library(class)
 
-bc_data<-read.csv("dataset/BREAST CANCER.csv")
+bc_data<-read.csv("./predictive analyisis/dataset/BREAST CANCER.csv")
 
 View(bc_data)
 
@@ -16,8 +19,16 @@ test<- bc_norm[470:569,]
 train_label <- bc_data[1:469,2]
 test_label <- bc_data[470:569,2]
 
-pr<-knn(train=train,test=test,cl=train_label,k=21)
+i<-1
+t <-0
+while(t!=100 && i<=100){
+    knn_model <- knn(train=train,test = test,cl=train_label,k=i)
+    cm <- table(test_label , knn_model)
+    accuracy <- function(x) {sum(diag(x))/(sum(rowSums(x)))*100}
+    t<-accuracy(cm)
+    print(t)
+    i<-i+1
+}
 
-cm<-table(test_label,pr)
 
-accuracy(cm)
+ View(knn_model)
